@@ -7,3 +7,5 @@ RangeSlider provides an option to customize the range of the slider. We can set 
     this.rangeSlider1.Maximum = 10;
     this.rangeSlider1.TickFrequency = 1;
     this.StartPosition = FormStartPosition.CenterScreen;
+
+![Custom RangeSlider](RangeSlider_CustomRangeintervals/Image/Custom%20RangeSlider.png)
