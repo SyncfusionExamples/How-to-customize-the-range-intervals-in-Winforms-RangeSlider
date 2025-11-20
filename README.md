@@ -49,3 +49,6 @@ private void RangeSlider1_DrawLabel(object sender, DrawLabelEventArgs e)
 
 ## Reference
 For more details, refer to the official Syncfusion Knowledge Base: https://www.syncfusion.com/kb/11982/how-to-customize-the-range-intervals-in-winforms-rangeslider
+
+## Output
+![Custom RangeSlider](RangeSlider_CustomRangeintervals/Image/custom_range_intervals_winforms_rangeslider.png)
