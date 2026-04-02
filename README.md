@@ -1,54 +1,25 @@
 # How to Customize the Range Intervals in WinForms RangeSlider
-The Syncfusion WinForms RangeSlider control provides options to customize the slider range to meet specific application requirements. By adjusting properties such as Minimum, Maximum, TickFrequency, and handling the DrawLabel event, you can create a slider that fits your desired range and display format.
+This sample demonstrates how to build a user-friendly time-scale slider in a WinForms application using the Syncfusion RangeSlider. It shows how to customize tick intervals, format labels (e.g., 12-hour time), and configure minimum/maximum values so users can scrub through a logical range like half-hour increments across a day.
 
-## Why Customize the Range?
-Customizing the range intervals allows you to:
-- Define the minimum and maximum values for the slider.
-- Control the tick frequency for precise value selection.
-- Display custom labels (e.g., time intervals) for better user experience.
+## Features
+- Set minimum/maximum slider bounds for the domain
+- Configure tick frequency for uniform intervals (e.g., every 30 minutes)
+- Show labels along the track for better readability
+- Customize label text via DrawLabel to display formatted values (e.g., 01:00 PM)
+- Optional snapping behavior through TickFrequency
+- Easy to center and initialize with form StartPosition
 
-## Key Properties
+## Getting Started
+1. Create a new Windows Forms App (.NET Framework or .NET) in Visual Studio.
+2. Install the NuGet package: Syncfusion.Tools.Windows.
+3. Add a RangeSlider (namespace: Syncfusion.Windows.Forms.Tools) to your form (e.g., rangeSlider1).
+4. Configure core properties and hook the DrawLabel event to customize the label text.
 
-- **Minimum**: Sets the lowest value of the slider.
-- **Maximum**: Defines the highest value of the slider.
-- **TickFrequency**: Determines the interval between ticks.
-- **ShowLabels**: Enables label display on the slider.
-- **StartPosition**: Specifies the initial position of the form.
+## Usage Tips
+- Map numeric ticks to domain values (minutes, distance, progress) inside DrawLabel.
+- Adjust Minimum/Maximum to match your domain length. For a 24-hour range at 30-minute intervals, you would use 0..48 with TickFrequency = 1.
+- Use ShowLabels for readability; hide if labels are too dense and render a legend elsewhere.
+- If you need a specific start time, offset your base DateTime accordingly in DrawLabel.
 
-## Example Code
-```C#
-public Form1()
-{
-    InitializeComponent();
-
-    // Configure RangeSlider properties
-    this.rangeSlider1.DrawLabel += RangeSlider1_DrawLabel;
-    this.rangeSlider1.ShowLabels = true;
-    this.rangeSlider1.Minimum = 1;
-    this.rangeSlider1.Maximum = 10;
-    this.rangeSlider1.TickFrequency = 1;
-
-    // Center the form on the screen
-    this.StartPosition = FormStartPosition.CenterScreen;
-}
-
-private void RangeSlider1_DrawLabel(object sender, DrawLabelEventArgs e)
-{
-    // Convert slider value to time intervals
-    TimeSpan timeSpan = new TimeSpan(0, 30, 0);
-    for (int i = 0; i < e.Value; i++)
-    {
-        timeSpan = timeSpan.Add(new TimeSpan(0, 30, 0));
-    }
-
-    DateTime time = DateTime.Today.Add(timeSpan);
-    e.Text = time.ToString("hh:mm tt");
-    e.Handled = true;
-}
-```
-
-## Reference
-For more details, refer to the official Syncfusion Knowledge Base: https://www.syncfusion.com/kb/11982/how-to-customize-the-range-intervals-in-winforms-rangeslider
-
-## Output
-![Custom RangeSlider](RangeSlider_CustomRangeintervals/Image/custom_range_intervals_winforms_rangeslider.png)
+## About the Sample
+This sample provides a concise starting point for building domain-aware sliders in WinForms. It demonstrates mapping numeric ticks to real-world values (e.g., half-hour time slots), customizing label rendering for human-friendly formats, and setting uniform tick intervals for predictable navigation. Extend it by changing the domain (dates, percentages, distances), providing snapping and selection logic, and applying your app theme. The goal is to help users scrub, read, and select values effortlessly with clear, formatted labels.
